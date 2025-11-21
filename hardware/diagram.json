@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "author": "Eduardo M Sanchez",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 96,
+      "left": 33.64,
+      "attrs": { "label": "ESP32 DevKitC (I2C: SDA=21, SCL=22)" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 88.8,
+      "left": -75,
+      "attrs": { "volume": "0.1", "label": "Buzzer KY-012 (1=GND, 2=GPIO25)" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "txt2",
+      "top": 336,
+      "left": -86.4,
+      "attrs": { "text": "Buzzer KY-012\n(1=GND, 2=GPIO25)" }
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu1",
+      "top": 118.18,
+      "left": 166.12,
+      "rotate": 270,
+      "attrs": { "label": "MPU6050 (I2C 0x68)" }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "btn1",
+      "top": 247.4,
+      "left": 172.8,
+      "attrs": { "color": "green", "xray": "1", "bounce": "0", "label": "Botão Pânico (6mm) (GND↔GPIO18)" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "txt1",
+      "top": 44,
+      "left": -96,
+      "attrs": { "text": "Projeto ODS3 – ESP32 + MPU6050 + Botão + Buzzer" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v-0.08", "h-144.15" ] ],
+    [ "imu1:SDA", "esp:21", "green", [ "v-0.08", "h-38.4", "v28.8" ] ],
+    [ "imu1:SCL", "esp:22", "green", [ "v-0.08", "h-48" ] ],
+    [ "esp:GND.2", "imu1:GND", "black", [ "v0" ] ],
+    [ "bz1:1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "bz1:2", "esp:25", "red", [ "v0" ] ],
+    [ "btn1:1.l", "esp:18", "green", [ "h0" ] ],
+    [ "btn1:2.r", "esp:GND.2", "black", [ "h19.2", "v-20" ] ]
+  ],
+  "dependencies": {}
+}
